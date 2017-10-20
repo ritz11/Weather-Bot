@@ -67,7 +67,7 @@ def processRequest(req):
     if req.get("result").get("action") == "sunrise":
         res = makeWebhookResult2(data)
         return res
-     if req.get("result").get("action") == "humidity":
+    if req.get("result").get("action") == "humidity":
         res = makeWebhookResult3(data)
         return res
 

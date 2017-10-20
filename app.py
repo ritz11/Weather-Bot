@@ -67,6 +67,9 @@ def processRequest(req):
     if req.get("result").get("action") == "sunrise":
         res = makeWebhookResult2(data)
         return res
+     if req.get("result").get("action") == "humidity":
+        res = makeWebhookResult3(data)
+        return res
 
 def makeYqlQuery(req):
     result = req.get("result")
@@ -191,6 +194,45 @@ def makeWebhookResult2(data):
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample"
     }
+
+def makeWebhookResult3(data):
+    query = data.get('query')
+    if query is None:
+        return {}
+
+    result = query.get('results')
+    if result is None:
+        return {}
+
+    channel = result.get('channel')
+    if channel is None:
+        return {}
+
+    item = channel.get('item')
+    location = channel.get('location')
+    units = channel.get('units')
+    if (location is None) or (item is None) or (units is None):
+        return {}
+
+    atmosphere = channel.get('atmosphere')
+    if atmosphere is None:
+        return {}
+
+    # print(json.dumps(item, indent=4))
+
+    speech = "Today in " + location.get('city') + ": " + "humidity :  " + atmosphere.get('humidity')
+
+    print("Response:")
+    print(speech)
+
+    return {
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-weather-webhook-sample"
+    }
+
 
 
 if __name__ == '__main__':

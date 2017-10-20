@@ -179,7 +179,7 @@ def makeWebhookResult2(data):
 
     # print(json.dumps(item, indent=4))
 
-    speech = "Today in " + location.get('city') + ": " + "sun will set at" + astronomy.get('sunrise')
+    speech = "Today in " + location.get('city') + ": " + "sun will rise at" + astronomy.get('sunrise')
 
     print("Response:")
     print(speech)

@@ -133,12 +133,12 @@ def makeWebhookResult1(data):
         return {}
 
     astronomy = channel.get('astronomy')
-    if condition is None:
+    if astronomy is None:
         return {}
 
     # print(json.dumps(item, indent=4))
 
-    speech = "Today in " + location.get('city') + ": " + "sun will set at" + astronomy.get("sunset")
+    speech = "Today in " + location.get('city') + ": " + "sun will set at" + astronomy.get('sunset')
 
     print("Response:")
     print(speech)
